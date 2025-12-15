@@ -87,6 +87,11 @@ class TransactionController extends Controller
             return redirect()->back()->with('error', 'Bukti pembayaran tidak ditemukan.');
         }
 
-        return Storage::download($vaccination->payment_proof);
+        // Check if file exists on public disk
+        if (!Storage::disk('public')->exists($vaccination->payment_proof)) {
+            return redirect()->back()->with('error', 'File bukti pembayaran tidak ditemukan di storage.');
+        }
+
+        return Storage::disk('public')->download($vaccination->payment_proof);
     }
 }
