@@ -242,7 +242,7 @@
                     @if($vaccination->payment_proof)
                         <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                             <p class="text-sm font-semibold text-gray-700 mb-2">Bukti Pembayaran</p>
-                            <img src="{{ Storage::url($vaccination->payment_proof) }}" 
+                            <img src="{{ Storage::disk('public')->url($vaccination->payment_proof) }}" 
                                  alt="Bukti Pembayaran" 
                                  class="max-w-md h-auto rounded-lg border border-gray-300">
                         </div>

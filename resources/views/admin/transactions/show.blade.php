@@ -111,7 +111,7 @@
                 <div class="mb-4 p-4 bg-gray-50 rounded-lg">
                     <p class="text-sm font-semibold text-gray-700 mb-2">Bukti Pembayaran</p>
                     <div class="flex items-center space-x-4">
-                        <img src="{{ Storage::url($vaccination->payment_proof) }}" 
+                        <img src="{{ Storage::disk('public')->url($vaccination->payment_proof) }}" 
                              alt="Bukti Pembayaran" 
                              class="max-w-xs h-auto rounded-lg border border-gray-300">
                         <div>
