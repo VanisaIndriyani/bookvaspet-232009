@@ -242,9 +242,10 @@
                     @if($vaccination->payment_proof)
                         <div class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
                             <p class="text-sm font-semibold text-gray-700 mb-2">Bukti Pembayaran</p>
-                            <img src="{{ Storage::disk('public')->url($vaccination->payment_proof) }}" 
+                            <img src="{{ asset('storage/' . $vaccination->payment_proof) }}" 
                                  alt="Bukti Pembayaran" 
-                                 class="max-w-md h-auto rounded-lg border border-gray-300">
+                                 class="max-w-md h-auto rounded-lg border border-gray-300"
+                                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\' font-family=\'sans-serif\' font-size=\'18\'%3EGambar tidak dapat dimuat%3C/text%3E%3C/svg%3E';">
                         </div>
                     @endif
 
@@ -283,6 +284,12 @@
             // Dalam production, ini harus menggunakan data QRIS yang valid dari payment gateway
             const qrisData = 'https://petvax.com/payment/qris?id={{ $vaccination->id }}';
             const qrContainer = document.getElementById('qris-qrcode');
+            
+            // Check if element exists before manipulating
+            if (!qrContainer) {
+                console.warn('QR Code container not found');
+                return;
+            }
             
             // Gunakan API QR code generator sebagai fallback yang lebih reliable
             const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(qrisData);

@@ -111,9 +111,10 @@
                 <div class="mb-4 p-4 bg-gray-50 rounded-lg">
                     <p class="text-sm font-semibold text-gray-700 mb-2">Bukti Pembayaran</p>
                     <div class="flex items-center space-x-4">
-                        <img src="{{ Storage::disk('public')->url($vaccination->payment_proof) }}" 
+                        <img src="{{ asset('storage/' . $vaccination->payment_proof) }}" 
                              alt="Bukti Pembayaran" 
-                             class="max-w-xs h-auto rounded-lg border border-gray-300">
+                             class="max-w-xs h-auto rounded-lg border border-gray-300"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'400\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'400\' height=\'300\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\' font-family=\'sans-serif\' font-size=\'18\'%3EGambar tidak dapat dimuat%3C/text%3E%3C/svg%3E';">
                         <div>
                             <a href="{{ route('admin.transactions.download-proof', $vaccination->id) }}" 
                                class="inline-block px-4 py-2 bg-pink-500 hover:bg-pink-600 text-white rounded-lg text-sm">
